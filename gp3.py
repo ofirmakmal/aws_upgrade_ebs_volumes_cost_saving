@@ -23,8 +23,9 @@ for result in response['Volumes']:
     IOP = result['Iops']
     try:
         if Size < 1000 and IOP < 3000 and (VolumeType  == 'gp2' or VolumeType == 'io1'):
+            print(f"{VolumeId} can be upgraded to gp3")
             modify = client.modify_volume(VolumeId=VolumeId,VolumeType='gp3', DryRun=DryRun)
-            print(f"{VolumeId} chnaged to gp3")
+            print(f"{VolumeId} changed to gp3")
         else: 
             print(f"{VolumeId} does not fit criteria")
     except botocore.exceptions.ClientError as error:
