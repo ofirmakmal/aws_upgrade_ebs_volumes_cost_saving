@@ -8,10 +8,11 @@ client = boto3.client('ec2')
 #get addresses
 response = client.describe_volumes()
 
-if os.environ['DRYRUN'] == 'False':
-    DryRun = False
-elif os.environ['DRYRUN'] == 'True':
-    DryRun = True
+if 'DRYRUN' in os.environ:
+    if os.environ['DRYRUN'] == 'False':
+        DryRun = False
+    elif os.environ['DRYRUN'] == 'True':
+        DryRun = True
 else: DryRun = True
 
 
